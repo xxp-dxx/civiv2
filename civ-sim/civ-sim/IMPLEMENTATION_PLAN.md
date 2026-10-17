@@ -1,21 +1,21 @@
 # Implementation Plan
 
-Status is based on source inspection. Tests are present, but a successful test run from this session has not yet been observed; do not infer test results from the existence of the suite.
+Status is based on source inspection and GitHub Actions run [39029040482](https://github.com/xxp-dxx/civiv2/actions/runs/39029040482), where `npm test` passed on Node.js 20 and 22.
 
 ## Milestone 0 — Repository and technical foundation
 
-**Status: in progress.**
+**Status: substantially complete for the current prototype; hosting decisions remain open.**
 
-Existing: Node.js 20+ requirement, dependency-free scripts, modular server/simulation/store split, a state version check, tests, and concise agent notes.
+Existing: Node.js 20+ requirement, dependency-free scripts, modular server/simulation/store split, a state version check, and a test suite. This session adds the missing architecture/product/data/handoff documents and a GitHub Actions test workflow.
 
-This session adds the missing architecture/product/data/handoff documents and a GitHub Actions test workflow. Acceptance is complete only after CI runs successfully and the docs match actual runtime behavior.
-
-Acceptance criteria:
-- A fresh checkout can follow the README to run tests and start the API.
+Acceptance criteria met for this scope:
+- A fresh checkout has instructions to run tests and start the API.
 - Agent instructions explain architecture boundaries and handoff rules.
 - Product scope, data model, architecture, milestones, current state, and limitations are documented.
-- Automated tests run on a supported Node version in CI.
-- Required secrets/hosting choices are not guessed or committed.
+- Automated tests run on Node.js 20 and 22 in CI.
+- No secrets or unverified hosting claims were introduced.
+
+Remaining before production: choose and verify hosting/storage, add migrations and recovery operations, and establish monitoring/backup procedures.
 
 ## Milestone 1 — Shared persistent world
 
@@ -77,4 +77,4 @@ Expand NPC decisions, markets, technology, environmental events, interface usabi
 
 ## Next bounded task
 
-Complete and verify Milestone 0: observe the new CI result; fix any failing tests; then add a minimal browser client for join, map view, travel, and journey status without moving authoritative simulation logic into the client.
+Implement a minimal browser client for join, map view, travel, and journey status without moving authoritative simulation logic into the client. Acceptance criteria: a player can join and travel from the UI; refresh preserves session/journey state where the client stores its token; the server remains authoritative; and two independent clients see shared public map data without private journey details leaking.
